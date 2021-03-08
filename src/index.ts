@@ -2,7 +2,6 @@ import { createCommand, parse } from "commander";
 import {
   init,
   install,
-  update,
   updateAll,
   uninstall,
   detect,
@@ -15,7 +14,7 @@ program.version("1.0.0");
 program
   .command("init")
   .description("create new vscode-extensions.json file")
-  .action(async (env, options) => {
+  .action(async () => {
     await init();
   });
 
@@ -38,7 +37,7 @@ program
   .description("update single or all extensions")
   .action(async (extensionIdentifer) => {
     if (extensionIdentifer) {
-      await update(parseExtensionIdentifier(extensionIdentifer));
+      await install(parseExtensionIdentifier(extensionIdentifer));
     } else {
       await updateAll();
     }

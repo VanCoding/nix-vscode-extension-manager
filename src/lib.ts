@@ -70,7 +70,7 @@ export async function init() {
 }
 
 export function parseExtensionIdentifier(extensionIdentifier: string) {
-  const parts = extensionIdentifier.split("/");
+  const parts = extensionIdentifier.split(".");
   return {
     publisher: parts[0],
     name: parts[1],
@@ -96,7 +96,7 @@ function findExistingExtension(
 }
 
 function renderExtensionIdentifier(extension: ExtensionIdentifier) {
-  return extension.publisher + "/" + extension.name;
+  return extension.publisher + "." + extension.name;
 }
 
 function renderExtension(extension: ExtensionEntry) {
@@ -106,30 +106,16 @@ function renderExtension(extension: ExtensionEntry) {
 export async function install(extension: ExtensionIdentifier) {
   const extensions = await readExtensions();
   const existing = findExistingExtension(extensions, extension);
-  if (existing) {
-    throw new Error("extension is already installed");
-  }
   const info = await getExtensionInfo(extension);
-
-  const newExtensions = [...extensions, info];
-  await writeExtensions(newExtensions);
-  console.log("installed", renderExtension(info));
-}
-
-export async function update(extension: ExtensionIdentifier) {
-  const extensions = await readExtensions();
-  const existing = findExistingExtension(extensions, extension);
-  if (!existing) {
-    throw new Error("extension is not installed");
-  }
-  const info = await getExtensionInfo(extension);
-  if (extensionsAreEqual(existing, info)) {
-    console.log(renderExtension(info), "is already up to date");
+  if (existing && extensionsAreEqual(existing, info)) {
+    console.log(renderExtension(existing), "is already up to date");
     return;
   }
-  const newExtensions = extensions.map((e) =>
-    compareExtensionIdentifiers(e, extension) ? info : e
-  );
+
+  const newExtensions = [
+    ...extensions.filter((e) => !compareExtensionIdentifiers(e, info)),
+    info,
+  ];
   await writeExtensions(newExtensions);
   console.log("installed", renderExtension(info));
 }
@@ -150,7 +136,7 @@ export async function uninstall(extension: ExtensionIdentifier) {
 export async function updateAll() {
   const extensions = await readExtensions();
   for (var extension of extensions) {
-    await update(extension);
+    await install(extension);
   }
 }
 
