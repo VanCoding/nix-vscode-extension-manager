@@ -2,10 +2,16 @@
 
 A CLI to manage VSCode extensions on NixOS or within a nix-shell
 
-# Commands
+## Usage
 
-- `nvem init`
-- `nvem install [publisher]/[name]`
-- `nvem update [publisher]/[name]`
-- `nvem update`
-- `nvem uninstall [publisher]/[name]`
+```
+USAGE
+  $ nvem [COMMAND]
+
+COMMANDS
+  help       display help for nvem
+  init       create new vscode-extensions.json file
+  install    install new extension
+  uninstall  uninstall extension
+  update     update extension to newest version
+```
