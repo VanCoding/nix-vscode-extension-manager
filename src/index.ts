@@ -34,17 +34,14 @@ program
   });
 
 program
-  .command("update <extension>")
-  .description("update extension")
+  .command("update [extension]")
+  .description("update single or all extensions")
   .action(async (extensionIdentifer) => {
-    await update(parseExtensionIdentifier(extensionIdentifer));
-  });
-
-program
-  .command("update")
-  .description("update all extensions")
-  .action(async (extensionIdentifer) => {
-    await updateAll();
+    if (extensionIdentifer) {
+      await update(parseExtensionIdentifier(extensionIdentifer));
+    } else {
+      await updateAll();
+    }
   });
 
 program

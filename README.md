@@ -34,8 +34,8 @@ Commands:
   init                     create new vscode-extensions.json file
   detect <extensions-dir>  create vscode-extensions.json from existing extensions-dir
   install <extension>      install new extension
-  update <extension>       update extension
-  update                   update all extensions
+  update [extension]       update single or all extensions
   uninstall <extension>    install new extension
   help [command]           display help for command
+
 ```
