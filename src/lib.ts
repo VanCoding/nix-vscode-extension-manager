@@ -1,7 +1,8 @@
 import axios from "axios";
-import { readFile, writeFile } from "fs-extra";
+import { readFile, writeFile, readdir } from "fs-extra";
 import crypto from "crypto";
 import zip from "jszip";
+import path from "path";
 
 const FILE_PATH = "./vscode-extensions.json";
 
@@ -150,5 +151,19 @@ export async function updateAll() {
   const extensions = await readExtensions();
   for (var extension of extensions) {
     await update(extension);
+  }
+}
+
+export async function detect(dir: string = "~/.vscode/extensions") {
+  await init();
+  const extensionDirs = await readdir(dir);
+  for (const extensionDir of extensionDirs) {
+    const info = JSON.parse(
+      (await readFile(path.resolve(dir, extensionDir, "package.json"))) + ""
+    );
+    await install({
+      publisher: info.publisher,
+      name: info.name,
+    });
   }
 }

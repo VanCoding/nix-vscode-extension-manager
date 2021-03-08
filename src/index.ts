@@ -5,6 +5,7 @@ import {
   update,
   updateAll,
   uninstall,
+  detect,
   parseExtensionIdentifier,
 } from "./lib";
 
@@ -16,6 +17,13 @@ program
   .description("create new vscode-extensions.json file")
   .action(async (env, options) => {
     await init();
+  });
+
+program
+  .command("detect <extensions-dir>")
+  .description("create vscode-extensions.json from existing extensions-dir")
+  .action(async (dir) => {
+    await detect(dir);
   });
 
 program
