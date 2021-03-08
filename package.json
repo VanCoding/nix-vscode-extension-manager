@@ -49,7 +49,7 @@
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
     "test": "echo NO TESTS",
     "version": "oclif-dev readme && git add README.md",
-    "build":"tsc"
+    "build": "tsc"
   },
   "types": "lib/index.d.ts"
 }
