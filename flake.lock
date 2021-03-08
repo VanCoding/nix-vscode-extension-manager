@@ -16,9 +16,25 @@
         "type": "github"
       }
     },
+    "npmlock2nix": {
+      "locked": {
+        "lastModified": 1615243001,
+        "narHash": "sha256-JdzX1Y7z/NLnYcxSoH1d5F0bbOdWR1xyUEcS8ThnleY=",
+        "owner": "VanCoding",
+        "repo": "npmlock2nix",
+        "rev": "3551e2f5068fb17d82eb4a51dabbe8ec503f661b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "VanCoding",
+        "repo": "npmlock2nix",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "npmlock2nix": "npmlock2nix"
       }
     }
   },
