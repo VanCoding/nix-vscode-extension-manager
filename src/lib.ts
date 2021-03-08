@@ -1,5 +1,5 @@
 import axios from "axios";
-import fs from "fs-extra";
+import { readFile, writeFile } from "fs-extra";
 import crypto from "crypto";
 import zip from "jszip";
 
@@ -51,7 +51,7 @@ async function getExtensionInfo(extension: ExtensionIdentifier) {
 
 async function readExtensions() {
   try {
-    const content = await fs.readFile(FILE_PATH);
+    const content = await readFile(FILE_PATH);
     return JSON.parse(content + "") as ExtensionEntry[];
   } catch (e) {
     console.log("directory is not initialized yet. run init first.");
@@ -60,7 +60,7 @@ async function readExtensions() {
 }
 
 async function writeExtensions(entries: ExtensionEntry[]) {
-  await fs.writeFile(FILE_PATH, JSON.stringify(entries, null, "  "));
+  await writeFile(FILE_PATH, JSON.stringify(entries, null, "  "));
 }
 
 export async function init() {
