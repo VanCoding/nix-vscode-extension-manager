@@ -45,7 +45,7 @@ program
 
 program
   .command("uninstall <extension>")
-  .description("install new extension")
+  .description("uninstall extension")
   .action(async (extensionIdentifer) => {
     await uninstall(parseExtensionIdentifier(extensionIdentifer));
   });

@@ -35,7 +35,7 @@ Commands:
   detect <extensions-dir>  create vscode-extensions.json from existing extensions-dir
   install <extension>      install new extension
   update [extension]       update single or all extensions
-  uninstall <extension>    install new extension
+  uninstall <extension>    uninstall extension
   help [command]           display help for command
 
 ```
