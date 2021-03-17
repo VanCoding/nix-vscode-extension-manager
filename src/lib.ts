@@ -112,10 +112,11 @@ export async function install(extension: ExtensionIdentifier) {
     return;
   }
 
-  const newExtensions = [
-    ...extensions.filter((e) => !compareExtensionIdentifiers(e, info)),
-    info,
-  ];
+  const newExtensions = existing
+    ? extensions.map((e) =>
+        compareExtensionIdentifiers(e, extension) ? info : e
+      )
+    : [...extensions, info];
   await writeExtensions(newExtensions);
   console.log("installed", renderExtension(info));
 }
